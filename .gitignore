@@ -452,3 +452,11 @@ $RECYCLE.BIN/
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+# src projs
+src/LStudies.UI.Site/bin
+src/LStudies.UI.Site/obj
+src/LStudies.UI.Site/wwwroot
+src/LStudies.UI.Site/Properties
+src/LStudies.UI.Site/appsettings.json
+src/LStudies.UI.Site/appsettings.Development.json
