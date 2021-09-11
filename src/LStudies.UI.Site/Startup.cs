@@ -1,10 +1,12 @@
 using LStudies.UI.Site.Data;
+using LStudies.UI.Site.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 using static LStudies.UI.Site.Data.PedidoRepository;
 
 namespace LStudies.UI.Site
@@ -32,6 +34,12 @@ namespace LStudies.UI.Site
             services.AddRazorPages();
 
             services.AddTransient<IPedidoRepository, PedidoRepository>();
+
+            services.AddTransient<IOperacaoTransient, Operacao>(); //usar quando não souber qual DI utilizar
+            services.AddScoped<IOperacaoScoped, Operacao>(); //recomendado para o mvc e .net core se não for prejudicial
+            services.AddSingleton<IOperacaoSingleton, Operacao>(); //uso raro, possibilita que users acedam info de outros quando estes estão conectados ao server
+            services.AddSingleton<IOperacaoSingletonInstance>(new Operacao(Guid.Empty)); //
+            services.AddTransient<OperacaoService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
