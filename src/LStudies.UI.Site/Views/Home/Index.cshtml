@@ -1,1 +1,6 @@
-﻿Hello!
+﻿@using LStudies.UI.Site.Data
+@inject IPedidoRepository pedidoRepository;
+
+Hello!
+
+@pedidoRepository.ObterPedido().Id;
