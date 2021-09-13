@@ -3,16 +3,17 @@ using LStudies.UI.Site.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using static LStudies.UI.Site.Data.PedidoRepository;
 
 namespace LStudies.UI.Site
 {
     public class Startup
     {
+        //metodo usado para recuperar configuracoes do ficheiro appsettings.json
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -25,14 +26,19 @@ namespace LStudies.UI.Site
         {
             services.Configure<RazorViewEngineOptions>(options =>
             {
+                //mudar o nome da pasta das areas da app
                 options.AreaViewLocationFormats.Clear();
                 options.AreaViewLocationFormats.Add(item: "/Modulos/{2}/Views/{1}/{0}.cshtml");
                 options.AreaViewLocationFormats.Add(item: "/Modulos/{2}/Views/Shared/{0}.cshtml");
                 options.AreaViewLocationFormats.Add(item: "/Views/Shared/{0}.cshtml");
             });
 
+            //db
+            services.AddDbContext<MyDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("MyDbContext")));
+
             services.AddRazorPages();
 
+            //injecao de dependencia
             services.AddTransient<IPedidoRepository, PedidoRepository>();
 
             services.AddTransient<IOperacaoTransient, Operacao>(); //usar quando não souber qual DI utilizar
