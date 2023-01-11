@@ -1,12 +1,12 @@
 # dotnet-mvc-core
 
 This app is developed to show how to set up:
-### JavaScript
-### Bootstrap
-### Fontawesome 
-### Bundle & Minification 
-### Dependency Injection
-### Entity Framework
+###### JavaScript
+###### Bootstrap
+###### Fontawesome 
+###### Bundle & Minification 
+###### Dependency Injection
+###### Entity Framework
 
 for ASP NET Core 3.5 or higher.
 
